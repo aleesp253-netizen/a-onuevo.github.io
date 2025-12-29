@@ -552,70 +552,43 @@
 
     <!-- Pantalla de espera con contador -->
     <div id="waitingScreen" class="fixed inset-0 z-[30] flex items-center justify-center bg-ink/95 backdrop-blur-sm">
+      <!-- Mini-puzles interactivos -->
+      <button id="magnifyingGlass" class="fixed top-6 left-6 h-14 w-14 rounded-2xl border border-uv/30 bg-deep/40 flex items-center justify-center hover:border-uv/50 hover:bg-deep/60 transition-all duration-300 group z-[31]" type="button" title="Escanear huellas">
+        <i data-lucide="search" class="h-7 w-7 text-uv group-hover:scale-110 transition-transform"></i>
+      </button>
+      
+      <button id="basketball" class="fixed top-6 right-6 h-14 w-14 rounded-2xl border border-ember/30 bg-deep/40 flex items-center justify-center hover:border-ember/50 hover:bg-deep/60 transition-all duration-300 group z-[31]" type="button" title="Lanzar balón">
+        <i data-lucide="dribbble" class="h-7 w-7 text-ember group-hover:scale-110 transition-transform"></i>
+      </button>
+      
+      <button id="uvLight" class="fixed bottom-6 left-6 h-14 w-14 rounded-2xl border border-pink/30 bg-deep/40 flex items-center justify-center hover:border-pink/50 hover:bg-deep/60 transition-all duration-300 group z-[31]" type="button" title="Luz UV">
+        <i data-lucide="zap" class="h-7 w-7 text-pink group-hover:scale-110 transition-transform"></i>
+      </button>
+      
+      <button id="forceOpen" class="fixed bottom-6 right-6 h-14 w-14 rounded-2xl border border-white/20 bg-deep/40 flex items-center justify-center hover:border-white/40 hover:bg-deep/60 transition-all duration-300 group z-[31]" type="button" title="Forzar apertura de caso">
+        <i data-lucide="unlock" class="h-7 w-7 text-white/80 group-hover:scale-110 transition-transform"></i>
+      </button>
+
       <div class="max-w-4xl mx-auto px-6 text-center">
         <div class="mb-8">
           <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-            <span class="text-uv">Criminalística</span> & <span class="text-pink">Básquetbol</span>
+            <span class="text-uv">Analizando</span> escena del <span class="text-pink">próximo año</span>...
           </h2>
           <p class="text-lg text-white/70 mb-6">
-            Preparando el expediente del año nuevo...
+            Espere a que se procesen las evidencias
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="rounded-2xl border border-uv/30 bg-deep/40 p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <i data-lucide="microscope" class="h-6 w-6 text-uv"></i>
-              <h3 class="text-lg font-bold text-uv">Análisis Forense</h3>
-            </div>
-            <ul class="text-left text-white/70 space-y-2">
-              <li class="flex items-start gap-2">
-                <span class="text-pink mt-1">▸</span>
-                <span>Evidencias recolectadas bajo luz UV</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-pink mt-1">▸</span>
-                <span>Huellas analizadas con precisión</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-pink mt-1">▸</span>
-                <span>Cadena de custodia intacta</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="rounded-2xl border border-pink/30 bg-deep/40 p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <i data-lucide="dribbble" class="h-6 w-6 text-pink"></i>
-              <h3 class="text-lg font-bold text-pink">Juego en Cancha</h3>
-            </div>
-            <ul class="text-left text-white/70 space-y-2">
-              <li class="flex items-start gap-2">
-                <span class="text-uv mt-1">▸</span>
-                <span>Posición: Ala-pívot #7</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-uv mt-1">▸</span>
-                <span>Rebotes y defensa de élite</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-uv mt-1">▸</span>
-                <span>Tiro decisivo en clutch</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Contador regresivo -->
-        <div class="rounded-2xl border border-white/20 bg-deep/50 p-8">
-          <div class="text-sm tracking-[0.2em] uppercase text-white/60 mb-4">Cuenta Regresiva para 2026</div>
+        <!-- Marcador de básquetbol estilo NBA -->
+        <div class="rounded-2xl border border-white/20 bg-deep/50 p-8 mb-6">
+          <div class="text-sm tracking-[0.2em] uppercase text-white/60 mb-4">Marcador de Básquetbol - Cuenta Regresiva para 2026</div>
           <div class="grid grid-cols-4 gap-4 max-w-md mx-auto">
             <div class="text-center">
               <div class="text-4xl font-black text-uv" id="waitDays">00</div>
               <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">DÍAS</div>
             </div>
             <div class="text-center">
-              <div class="text-4xl font-black text-pink" id="waitHours">00</div>
+              <div class="text-4xl font-black text-ember" id="waitHours">00</div>
               <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">HRS</div>
             </div>
             <div class="text-center">
@@ -632,6 +605,17 @@
               <span class="h-2 w-2 rounded-full bg-ember animate-pulse"></span>
               <span id="waitStatus">Procesando evidencia...</span>
             </span>
+          </div>
+        </div>
+        
+        <!-- Barra de Carga Forense -->
+        <div class="rounded-2xl border border-white/20 bg-deep/50 p-6">
+          <div class="text-sm tracking-[0.2em] uppercase text-white/60 mb-3">Barra de Carga Forense</div>
+          <div class="h-4 rounded-full bg-white/10 overflow-hidden">
+            <div id="forensicBar" class="h-full bg-gradient-to-r from-uv/80 via-pink/80 to-ember/80 transition-all duration-1000 ease-out" style="width: 0%"></div>
+          </div>
+          <div class="mt-2 text-xs text-white/50">
+            <span id="forensicPercent">0%</span> completado
           </div>
         </div>
       </div>
@@ -1283,17 +1267,8 @@
           gameStatus.textContent = "BUZZER";
           scoreLeft.textContent = "7";
           scoreRight.textContent = "7";
-          // Mostrar contenido principal cuando el contador llega a cero
-          const mainContent = document.getElementById("mainContent");
-          const waitingScreen = document.getElementById("waitingScreen");
-          if (mainContent && waitingScreen) {
-            waitingScreen.style.opacity = "0";
-            setTimeout(() => {
-              waitingScreen.style.display = "none";
-              mainContent.classList.remove("opacity-0");
-              mainContent.classList.add("opacity-100");
-            }, 300);
-          }
+          // Desbloquear automáticamente cuando el contador llega a cero
+          unlockMainContent();
           return;
         }
         const totalSeconds = Math.floor(diff / 1000);
@@ -1335,8 +1310,130 @@
         scoreRight.textContent = "7";
       }
 
+      const magnifyingGlass = document.getElementById("magnifyingGlass");
+      const basketball = document.getElementById("basketball");
+      const uvLight = document.getElementById("uvLight");
+      const forceOpen = document.getElementById("forceOpen");
+      const forensicBar = document.getElementById("forensicBar");
+      const forensicPercent = document.getElementById("forensicPercent");
+      let uvMode = false;
+      let scanningActive = false;
+
+      // Función para actualizar barra forense
+      function updateForensicBar() {
+        const now = new Date();
+        const target = new Date("2026-01-01T00:00:00");
+        const total = target.getTime() - new Date("2025-01-01T00:00:00").getTime();
+        const elapsed = now.getTime() - new Date("2025-01-01T00:00:00").getTime();
+        const percentage = Math.min(100, Math.max(0, (elapsed / total) * 100));
+        
+        forensicBar.style.width = `${percentage}%`;
+        forensicPercent.textContent = `${Math.round(percentage)}%`;
+      }
+
+      // Función para escanear huellas
+      magnifyingGlass.addEventListener("click", () => {
+        if (scanningActive) return;
+        scanningActive = true;
+        
+        // Crear efecto de escaneo
+        const scanOverlay = document.createElement("div");
+        scanOverlay.className = "fixed inset-0 z-[40] pointer-events-none";
+        scanOverlay.innerHTML = `
+          <div class="absolute inset-0 bg-uv/10 animate-pulse"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="text-6xl font-black text-pink animate-ping">2026</div>
+          </div>
+        `;
+        document.body.appendChild(scanOverlay);
+        
+        setTimeout(() => {
+          scanOverlay.remove();
+          scanningActive = false;
+        }, 2000);
+      });
+
+      // Función para lanzar balón
+      basketball.addEventListener("click", () => {
+        const ball = document.createElement("div");
+        ball.className = "fixed z-[35] w-16 h-16 rounded-full bg-gradient-to-br from-ember to-orange-600 shadow-lg";
+        ball.style.left = "100px";
+        ball.style.top = "100px";
+        ball.style.transition = "all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        document.body.appendChild(ball);
+        
+        setTimeout(() => {
+          ball.style.transform = "translate(400px, 200px) rotate(720deg)";
+        }, 100);
+        
+        setTimeout(() => {
+          // Activar confeti rosa
+          spawnConfettiBurst();
+          confettiRun = true;
+          confettiStopAt = performance.now() + 1500;
+          requestAnimationFrame(stepConfetti);
+          ball.remove();
+        }, 2100);
+      });
+
+      // Función para luz UV
+      uvLight.addEventListener("click", () => {
+        uvMode = !uvMode;
+        uvLight.classList.toggle("bg-pink/40");
+        uvLight.classList.toggle("border-pink/60");
+        
+        const counterElements = document.querySelectorAll('#waitDays, #waitHours, #waitMins, #waitSecs');
+        counterElements.forEach(el => {
+          if (uvMode) {
+            el.classList.add("text-pink");
+            el.classList.remove("text-uv", "text-ember");
+            el.style.textShadow = "0 0 20px rgba(255, 43, 214, 0.8)";
+          } else {
+            el.style.textShadow = "";
+            // Restaurar colores originales
+            if (el.id === 'waitDays' || el.id === 'waitMins') {
+              el.classList.add("text-uv");
+              el.classList.remove("text-pink");
+            } else if (el.id === 'waitHours') {
+              el.classList.add("text-ember");
+              el.classList.remove("text-pink");
+            } else {
+              el.classList.add("text-pink");
+            }
+          }
+        });
+      });
+
+      // Función para forzar apertura
+      forceOpen.addEventListener("click", () => {
+        unlockMainContent();
+      });
+
+      function unlockMainContent() {
+        const mainContent = document.getElementById("mainContent");
+        const waitingScreen = document.getElementById("waitingScreen");
+        
+        if (mainContent && waitingScreen) {
+          // Efecto de zoom hacia afuera
+          waitingScreen.style.transition = "all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+          waitingScreen.style.transform = "scale(1.5)";
+          waitingScreen.style.opacity = "0";
+          
+          setTimeout(() => {
+            waitingScreen.style.display = "none";
+            mainContent.classList.remove("opacity-0");
+            mainContent.classList.add("opacity-100");
+            // Iniciar música automáticamente
+            startSoundtrack();
+          }, 1000);
+        }
+      }
+
       updateCountdown();
-      setInterval(updateCountdown, 250);
+      setInterval(() => {
+        updateCountdown();
+        updateForensicBar();
+      }, 250);
 
       let confetti = [];
       let confettiRun = false;
