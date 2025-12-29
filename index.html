@@ -550,6 +550,93 @@
 
     <div id="fingerprints" class="fixed inset-0 z-[5] pointer-events-none" aria-hidden="true"></div>
 
+    <!-- Pantalla de espera con contador -->
+    <div id="waitingScreen" class="fixed inset-0 z-[30] flex items-center justify-center bg-ink/95 backdrop-blur-sm">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="mb-8">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <span class="text-uv">Criminalística</span> & <span class="text-pink">Básquetbol</span>
+          </h2>
+          <p class="text-lg text-white/70 mb-6">
+            Preparando el expediente del año nuevo...
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="rounded-2xl border border-uv/30 bg-deep/40 p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="microscope" class="h-6 w-6 text-uv"></i>
+              <h3 class="text-lg font-bold text-uv">Análisis Forense</h3>
+            </div>
+            <ul class="text-left text-white/70 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-pink mt-1">▸</span>
+                <span>Evidencias recolectadas bajo luz UV</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink mt-1">▸</span>
+                <span>Huellas analizadas con precisión</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink mt-1">▸</span>
+                <span>Cadena de custodia intacta</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-pink/30 bg-deep/40 p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="dribbble" class="h-6 w-6 text-pink"></i>
+              <h3 class="text-lg font-bold text-pink">Juego en Cancha</h3>
+            </div>
+            <ul class="text-left text-white/70 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-uv mt-1">▸</span>
+                <span>Posición: Ala-pívot #7</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-uv mt-1">▸</span>
+                <span>Rebotes y defensa de élite</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-uv mt-1">▸</span>
+                <span>Tiro decisivo en clutch</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contador regresivo -->
+        <div class="rounded-2xl border border-white/20 bg-deep/50 p-8">
+          <div class="text-sm tracking-[0.2em] uppercase text-white/60 mb-4">Cuenta Regresiva para 2026</div>
+          <div class="grid grid-cols-4 gap-4 max-w-md mx-auto">
+            <div class="text-center">
+              <div class="text-4xl font-black text-uv" id="waitDays">00</div>
+              <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">DÍAS</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-black text-pink" id="waitHours">00</div>
+              <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">HRS</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-black text-uv" id="waitMins">00</div>
+              <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">MIN</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-black text-pink" id="waitSecs">00</div>
+              <div class="text-xs tracking-[0.24em] uppercase text-white/55 mt-1">SEG</div>
+            </div>
+          </div>
+          <div class="mt-6 text-sm text-white/60">
+            <span class="inline-flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-ember animate-pulse"></span>
+              <span id="waitStatus">Procesando evidencia...</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main id="mainContent" class="relative z-[25] opacity-0 transition-opacity duration-1000 ease-in-out">
       <section class="mx-auto max-w-6xl px-6 pt-20 pb-10">
         <div class="flex flex-col gap-10">
@@ -1198,9 +1285,14 @@
           scoreRight.textContent = "7";
           // Mostrar contenido principal cuando el contador llega a cero
           const mainContent = document.getElementById("mainContent");
-          if (mainContent) {
-            mainContent.classList.remove("opacity-0");
-            mainContent.classList.add("opacity-100");
+          const waitingScreen = document.getElementById("waitingScreen");
+          if (mainContent && waitingScreen) {
+            waitingScreen.style.opacity = "0";
+            setTimeout(() => {
+              waitingScreen.style.display = "none";
+              mainContent.classList.remove("opacity-0");
+              mainContent.classList.add("opacity-100");
+            }, 300);
           }
           return;
         }
@@ -1213,6 +1305,31 @@
         cdHours.textContent = pad2(hours);
         cdMins.textContent = pad2(mins);
         cdSecs.textContent = pad2(secs);
+        
+        // Actualizar pantalla de espera
+        const waitDays = document.getElementById("waitDays");
+        const waitHours = document.getElementById("waitHours");
+        const waitMins = document.getElementById("waitMins");
+        const waitSecs = document.getElementById("waitSecs");
+        const waitStatus = document.getElementById("waitStatus");
+        
+        if (waitDays) waitDays.textContent = pad2(days);
+        if (waitHours) waitHours.textContent = pad2(hours);
+        if (waitMins) waitMins.textContent = pad2(mins);
+        if (waitSecs) waitSecs.textContent = pad2(secs);
+        
+        if (waitStatus) {
+          if (days <= 0 && hours <= 0) {
+            waitStatus.textContent = "Momento decisivo... CLUTCH";
+          } else if (days <= 7) {
+            waitStatus.textContent = "Última semana: preparando jugada final";
+          } else if (days <= 30) {
+            waitStatus.textContent = "Análisis en progreso: evidencia clasificada";
+          } else {
+            waitStatus.textContent = "Procesando evidencia...";
+          }
+        }
+        
         gameStatus.textContent = days <= 0 && hours <= 0 ? "CLUTCH" : "EN JUEGO";
         scoreLeft.textContent = "7";
         scoreRight.textContent = "7";
